@@ -1,12 +1,8 @@
 class ArabToRoman
-
   def initialize
-    @ones_map = {'0' => '', '1' => 'I', '2' => 'II', '3' => 'III', '4' => 'IV', '5' => 'V', '6' => 'VI',
-                 '7' => 'VII', '8' => 'VIII', '9' => 'IX'}
-    @tenths_map = {'0' => '', '1' => 'X', '2' => 'XX', '3' => 'XXX', '4' => 'XL', '5' => 'L', '6' => 'LX',
-                 '7' => 'LXX', '8' => 'LXXX', '9' => 'XC'}
-    @hundred_map = {'0' => '', '1' => 'C', '2' => 'CC', '3' => 'CCC', '4' => 'CD', '5' => 'D', '6' => 'DC',
-                   '7' => 'DCC', '8' => 'DCCC', '9' => 'CM'}
+    @ones_map = create_map 'I', 'V', 'X'
+    @tenths_map = create_map 'X', 'L', 'C'
+    @hundred_map = create_map 'C', 'D', 'M'
   end
 
   def convert(x)
@@ -33,11 +29,11 @@ class ArabToRoman
   end
 
   def write_thousand
-    res = ''
-    @thousands.to_i.times do
-      res << 'M'
-    end
-    res
+    'M' * @thousands
   end
 
+  def create_map one, five, ten
+    {'0' => '', '1' => one, '2' => one + one, '3' => one + one + one, '4' => one + five, '5' => five, '6' => five + one,
+     '7' => five + one + one, '8' => five + one + one + one, '9' => one + ten}
+  end
 end
