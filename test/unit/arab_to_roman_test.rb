@@ -1,81 +1,18 @@
 require_relative '../test_case'
-require_relative '../../lib/tasks/arab_to_roman'
+require_relative '../../lib/tasks/arab_roman'
 
 class FizzBuzzTest < Test::Unit::TestCase
-  def setup
-    @romans = ArabToRoman.new
-  end
-
-  def test_ones
-    @romans.convert 4
-    assert_equal 'IV', @romans.write_ones
-
-    @romans.convert 13
-    assert_equal 'III', @romans.write_ones
-
-    @romans.convert 133
-    assert_equal 'III', @romans.write_ones
-
-    @romans.convert 1333
-    assert_equal 'III', @romans.write_ones
-  end
-
-  def test_tenths
-    @romans.convert 4
-    assert_equal '', @romans.write_tenths
-
-    @romans.convert 13
-    assert_equal 'X', @romans.write_tenths
-
-    @romans.convert 133
-    assert_equal 'XXX', @romans.write_tenths
-
-    @romans.convert 1333
-    assert_equal 'XXX', @romans.write_tenths
-  end
-
-  def test_hundreds
-    @romans.convert 4
-    assert_equal '', @romans.write_hundreds
-
-    @romans.convert 13
-    assert_equal '', @romans.write_hundreds
-
-    @romans.convert 133
-    assert_equal 'C', @romans.write_hundreds
-
-    @romans.convert 1333
-    assert_equal 'CCC', @romans.write_hundreds
-  end
-
-  def test_thousand
-    @romans.convert 40
-    assert_equal '', @romans.write_thousand
-
-    @romans.convert 130
-    assert_equal '', @romans.write_thousand
-
-    @romans.convert 1330
-    assert_equal 'M', @romans.write_thousand
-
-    @romans.convert 5330
-    assert_equal 'MMMMM', @romans.write_thousand
-
-    @romans.convert 11330
-    assert_equal 'MMMMMMMMMMM', @romans.write_thousand
-  end
-
   def test_numbers
-    assert_equal 'VIII', @romans.convert(8)
-    assert_equal 'IX', @romans.convert(9)
-    assert_equal 'XXVIII', @romans.convert(28)
-    assert_equal 'XXIX', @romans.convert(29)
-    assert_equal 'CXCIX', @romans.convert(199)
-    assert_equal 'DCXXI', @romans.convert(621)
-    assert_equal 'DCCXXIX', @romans.convert(729)
-    assert_equal 'MCMXCII', @romans.convert(1992)
-    assert_equal 'MMMMMMCLXXXI', @romans.convert(6181)
-    assert_equal 'MMMMMMCLXXXIX', @romans.convert(6189)
-    assert_equal 'MMMMMMMMMMCMXCII', @romans.convert(10992)
+    assert_equal 'VIII', ArabRoman.convert(8)
+    assert_equal 'IX', ArabRoman.convert(9)
+    assert_equal 'XXVIII', ArabRoman.convert(28)
+    assert_equal 'XXIX', ArabRoman.convert(29)
+    assert_equal 'CXCIX', ArabRoman.convert(199)
+    assert_equal 'DCXXI', ArabRoman.convert(621)
+    assert_equal 'DCCXXIX', ArabRoman.convert(729)
+    assert_equal 'MCMXCII', ArabRoman.convert(1992)
+    assert_equal 'MMMMMMCLXXXI', ArabRoman.convert(6181)
+    assert_equal 'MMMMMMCLXXXIX', ArabRoman.convert(6189)
+    assert_equal 'MMMMMMMMMMCMXCII', ArabRoman.convert(10992)
   end
 end
