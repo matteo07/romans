@@ -58,19 +58,24 @@ class FizzBuzzTest < Test::Unit::TestCase
     @romans.convert 1330
     assert_equal 'M', @romans.write_thousand
 
-    @romans.convert 17330
-    assert_equal 'MMMMMMM', @romans.write_thousand
+    @romans.convert 5330
+    assert_equal 'MMMMM', @romans.write_thousand
+
+    @romans.convert 11330
+    assert_equal 'MMMMMMMMMMM', @romans.write_thousand
   end
 
-  def test_simple_numbers
+  def test_numbers
     assert_equal 'VIII', @romans.convert(8)
-    assert_equal 'XXVIII', @romans.convert(28)
-    assert_equal 'DCXXI', @romans.convert(621)
-    assert_equal 'MMMMMMCLXXXI', @romans.convert(6181)
-
     assert_equal 'IX', @romans.convert(9)
+    assert_equal 'XXVIII', @romans.convert(28)
     assert_equal 'XXIX', @romans.convert(29)
-    assert_equal 'DCXXIX', @romans.convert(629)
+    assert_equal 'CXCIX', @romans.convert(199)
+    assert_equal 'DCXXI', @romans.convert(621)
+    assert_equal 'DCCXXIX', @romans.convert(729)
+    assert_equal 'MCMXCII', @romans.convert(1992)
+    assert_equal 'MMMMMMCLXXXI', @romans.convert(6181)
     assert_equal 'MMMMMMCLXXXIX', @romans.convert(6189)
+    assert_equal 'MMMMMMMMMMCMXCII', @romans.convert(10992)
   end
 end
