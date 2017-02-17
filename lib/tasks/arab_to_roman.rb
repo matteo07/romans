@@ -13,7 +13,6 @@ class ArabToRoman
     @res << write_hundreds
     @res << write_tenths
     @res << write_ones
-    @res
   end
 
   def write_ones
