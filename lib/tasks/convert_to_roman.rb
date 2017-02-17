@@ -1,6 +1,6 @@
-require_relative 'number_convert'
+require_relative 'convert'
 
-class ArabToRoman < NumberConvert
+class ConvertToRoman < Convert
   def initialize(x)
     @n_to_convert = x
     @ones_map = create_map_to_roman 'I', 'V', 'X'

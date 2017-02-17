@@ -1,7 +1,7 @@
 require_relative '../test_case'
 require_relative '../../lib/tasks/arab_roman'
 
-class FizzBuzzTest < Test::Unit::TestCase
+class ConvertToRomanTest < Test::Unit::TestCase
   def test_numbers
     assert_equal 'VIII', ArabRoman.convert(8)
     assert_equal 'IX', ArabRoman.convert(9)
