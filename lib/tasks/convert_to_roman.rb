@@ -2,7 +2,7 @@ require_relative 'convert'
 
 class ConvertToRoman < Convert
   def initialize(x)
-    @TO_CONVERT = x
+    @TO_CONVERT = x.to_i
     @ones_map = create_map_to_roman 'I', 'V', 'X'
     @tenths_map = create_map_to_roman 'X', 'L', 'C'
     @hundred_map = create_map_to_roman 'C', 'D', 'M'
