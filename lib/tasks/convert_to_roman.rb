@@ -2,15 +2,15 @@ require_relative 'convert'
 
 class ConvertToRoman < Convert
   def initialize(x)
-    @n_to_convert = x
+    @TO_CONVERT = x
     @ones_map = create_map_to_roman 'I', 'V', 'X'
     @tenths_map = create_map_to_roman 'X', 'L', 'C'
     @hundred_map = create_map_to_roman 'C', 'D', 'M'
   end
 
   def convert
-    @thousands = (@n_to_convert / 1000).to_i
-    @number_divided_array = @n_to_convert.to_s.chars.map(&:to_s)
+    @thousands = (@TO_CONVERT / 1000).to_i
+    @number_divided_array = @TO_CONVERT.to_s.chars.map(&:to_s)
     @res = ''
     @res << write_thousand
     @res << write_hundreds

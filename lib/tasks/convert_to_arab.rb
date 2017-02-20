@@ -2,7 +2,7 @@ require_relative 'convert'
 
 class ConvertToArab < Convert
   def initialize(x)
-    @n_to_convert = x
+    @TO_CONVERT = x
     @ones_map = create_map_to_arab 'I', 'V', 'X'
     @tenths_map = create_map_to_arab 'X', 'L', 'C'
     @hundred_map = create_map_to_arab 'C', 'D', 'M'
@@ -10,37 +10,48 @@ class ConvertToArab < Convert
 
   def convert
     split_roman_number
-    @res = ''
-    @res << write_thousand
-    @res << write_hundreds
-    @res << write_tenths
-    @res << write_ones
-    @res.to_i
+    replace_empty_with_zero
+    @number_divided_array.reverse.join('').to_i
+  end
+
+  def replace_empty_with_zero
+    @number_divided_array.each do |st|
+      if st == ''
+        st.gsub!('', '0')
+      end
+    end
   end
 
   def split_roman_number
-    @number_divided_array = %w(MM C X I)
     @number_divided_array = []
+    @number_divided_array << extract_last(@ones_map)
+    @number_divided_array << extract_last(@tenths_map)
+    @number_divided_array << extract_last(@hundred_map)
     @number_divided_array << extract_thousand
   end
 
+  def extract_last(map)
+    res = ''
+    3.times do |j|
+      i = 3 - j
+      if is_in_map_last_chars_of_num(i, map)
+        res = map[@TO_CONVERT[(@TO_CONVERT.size - i)..(@TO_CONVERT.size - 1)]]
+        @TO_CONVERT = @TO_CONVERT[0..(@TO_CONVERT.size - i - 1)]
+      end
+    end
+    res
+  end
+
+  def is_in_map_last_chars_of_num(i, map)
+    map[@TO_CONVERT[(@TO_CONVERT.size - i)..(@TO_CONVERT.size - 1)]] != nil
+  end
+
   def extract_thousand
-    @n_to_convert[0..(@n_to_convert.rindex('M'))]
+    @last_m_index = @TO_CONVERT.rindex('M')
+    @last_m_index ? @TO_CONVERT[0..(@last_m_index)].size.to_s : 0
   end
 
-  def write_ones
-    @ones_map[@number_divided_array[3] || '']
-  end
-
-  def write_tenths
-    @tenths_map[@number_divided_array[2] || '']
-  end
-
-  def write_hundreds
-    @hundred_map[@number_divided_array[1] || '']
-  end
-
-  def write_thousand
-    @number_divided_array[0].length.to_s || ''
+  def get_last_index(one, five)
+    (@TO_CONVERT.rindex(one) || 0) > (@TO_CONVERT.rindex(five) || 0) ? @TO_CONVERT.rindex(one) : @TO_CONVERT.rindex(five)
   end
 end
