@@ -30,4 +30,8 @@ class ConvertToArabTest < Test::Unit::TestCase
   def test_with_nines
     assert_equal 3999, ArabRoman.convert('MMMCMXCIX')
   end
+
+  def test_error_if_have_non_roman_letters
+    assert_raise_message('Roman number given has a wrong format') {ArabRoman.convert('b')}
+  end
 end

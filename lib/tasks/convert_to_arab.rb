@@ -3,9 +3,31 @@ require_relative 'convert'
 class ConvertToArab < Convert
   def initialize(x)
     @TO_CONVERT = x
+    check_num
     @ones_map = create_map_to_arab 'I', 'V', 'X'
     @tenths_map = create_map_to_arab 'X', 'L', 'C'
     @hundred_map = create_map_to_arab 'C', 'D', 'M'
+  end
+
+  def check_num
+    get_forbidden_letters.each do |x|
+      if @TO_CONVERT.include? x
+        not_valid_exception
+      end
+    end
+  end
+
+  def not_valid_exception
+    raise 'Roman number given has a wrong format'
+  end
+
+  def get_forbidden_letters
+    res = ('a'..'z').to_a + ('A'..'Z').to_a
+    allowed = ['I','V','X','L','C','D','M']
+    allowed.each do |x|
+      res.delete x
+    end
+    res
   end
 
   def convert
