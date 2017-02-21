@@ -1,11 +1,8 @@
 require_relative '../test_case'
 require_relative '../../lib/tasks/arab_roman'
+require_relative '../../lib/tasks/roman_number_syntax_check'
 
 class ConvertToArabTest < Test::Unit::TestCase
-  def test_ones
-    assert_equal 1, 1
-  end
-
   def test_only_thousand_no_nines
     assert_equal 3000, ArabRoman.convert('MMM')
     assert_equal 1000, ArabRoman.convert('M')
@@ -29,9 +26,5 @@ class ConvertToArabTest < Test::Unit::TestCase
 
   def test_with_nines
     assert_equal 3999, ArabRoman.convert('MMMCMXCIX')
-  end
-
-  def test_error_if_have_non_roman_letters
-    assert_raise_message('Roman number given has a wrong format') {ArabRoman.convert('b')}
   end
 end
